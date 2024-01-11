@@ -11,5 +11,5 @@ fi
 paste -d "${fengefu}" \
 <(cut -f1 -d "${fengefu}" ${jsfile}) \
 <(cut -f2  ${jsfile} -d "${fengefu}"| \
-sed 's/\s\s*/_/g;s/&/_/g;s/+/_/g;s/-/_/g'|sed 's/__*/_/g') > new_celltype_Standard.${houzhui}
+sed 's/^\s\s*//g;s/\s\s*$//g;s/\s\s*/_/g;s/&/_/g;s/+/_/g;s/-/_/g'|sed 's/__*/_/g') > new_celltype_Standard.${houzhui}
 
