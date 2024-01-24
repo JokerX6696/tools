@@ -18,7 +18,12 @@ show_help() {
     echo "Options:"
     echo "  -i seurat,h5seurat"
     echo "  -s species hm:human;mm:mouse"
-    echo "  -o output default: ./"
+    # echo "  -o output default: ./"
+    echo "  -c use cell to subclusting"
+    echo "  -v wkdir env 2 or 3"
+    echo "  -r reduct methods pca or mnn"
+    echo "  -f resolution default:0.4"
+    echo "  -l colname default:new_celltype"
     echo "  --help         Display this help message"
     exit 0
 }
@@ -139,7 +144,7 @@ else
   echo "reduct type error"
   exit
 fi
-seurat_sub="$cell/Clustering/seurat.h5seurat"
+seurat_sub="sub_$cell/Clustering/seurat.h5seurat"
 Rscript /public/scRNA_works/pipeline/oesinglecell3/exec/sctool \
   -i  ${seurat_sub} \
   -f h5seurat \
@@ -193,7 +198,7 @@ Rscript /public/scRNA_works/pipeline/oesinglecell3/exec/scVis \
   --assay RNA \
   --slot data,scale.data \
   heatmap \
-  -l $cell/Marker/top10_markers_for_each_cluster.xls \
+  -l sub_$cell/Marker/top10_markers_for_each_cluster.xls \
   -c gene_diff \
   -n 10 \
   -g clusters \
@@ -209,7 +214,7 @@ Rscript /public/scRNA_works/pipeline/oesinglecell3/exec/sctool \
   --assay RNA \
   --dataslot data \
   visualize \
-  -l $cell/Marker/top10_markers_for_each_cluster.xls \
+  -l sub_$cell/Marker/top10_markers_for_each_cluster.xls \
   -g clusters \
   --reduct umap \
   --topn  10  \
