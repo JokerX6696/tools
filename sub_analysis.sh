@@ -14,9 +14,9 @@ output='./'
 
 # 显示帮助信息的函数
 show_help() {
-    echo "Usage: $0 -a <value_a> -b <value_b>"
+    echo "Usage: $0 "
     echo "Options:"
-    echo "  -i seurat,h5seurat"
+    echo "  -i seurat.h5seurat"
     echo "  -s species hm:human;mm:mouse"
     # echo "  -o output default: ./"
     echo "  -c use cell to subclusting"
@@ -116,7 +116,7 @@ if [[ $reduct == 'pca' ]];then
   --reduct1 pca  \
   --reduct2 umap   \
   --clusteringuse snn  \
-  --resolution 0.4   \
+  --resolution $resolution   \
   --rerun T   \
   --pointsize  0.5  \
   --palette customecol2
