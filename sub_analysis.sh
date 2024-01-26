@@ -193,7 +193,7 @@ Rscript /public/scRNA_works/pipeline/oesinglecell3/exec/sctool \
 Rscript /public/scRNA_works/pipeline/oesinglecell3/exec/scVis \
   -i ${seurat_sub}  \
   -f h5seurat \
-  -o sub_${cell}/Marker \
+  -o sub_${cell}/ \
   -t 10 \
   --assay RNA \
   --slot data,scale.data \
@@ -209,7 +209,7 @@ Rscript /public/scRNA_works/pipeline/oesinglecell3/exec/scVis \
 Rscript /public/scRNA_works/pipeline/oesinglecell3/exec/sctool \
   -i ${seurat_sub}   \
   -f h5seurat \
-  -o sub_${cell}/Marker \
+  -o sub_${cell}/ \
   -j 10 \
   --assay RNA \
   --dataslot data \
