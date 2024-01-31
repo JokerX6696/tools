@@ -20,7 +20,7 @@ show_help() {
     echo "  -s species hm:human;mm:mouse"
     # echo "  -o output default: ./"
     echo "  -c use cell to subclusting"
-    echo "  -v wkdir env 2 or 3"
+    echo "  -v wkenv env 2 or 3"
     echo "  -r reduct methods pca or mnn"
     echo "  -f resolution default:0.4"
     echo "  -l colname default:new_celltype"
@@ -140,6 +140,28 @@ elif [[ $reduct == 'mnn' ]];then
   --rerun T   \
   --pointsize  0.5   \
   --palette customecol2
+elif [[ $reduct == 'harmony' ]];then
+  Rscript  /public/scRNA_works/pipeline/oesinglecell3/exec/sctool \
+  -i  $seurat  \
+  -f h5seurat  \
+  -o sub_$cell/Clustering  \
+  -d h5seurat   \
+  --assay RNA  \
+  --dataslot counts,data,scale.data  \
+  --update F \
+  --predicate  "$lieming %in% c(\'$cell\')"  \
+  bclust   \
+  --reduct1 "pca,harmony"  \
+  --reduct2 umap  \
+  --batchid batchid  \
+  --clusteringuse snn  \
+  --resolution 0.4  \
+  --rerun T \
+  -t 20 \
+  -y 30 \
+  --pointsize  0.5   \
+  --palette customecol2
+
 else
   echo "reduct type error"
   exit
