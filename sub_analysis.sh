@@ -81,10 +81,10 @@ fi
 #anno
 if [[ $species == 'mm' ]];then
   anno=/data/database/cellranger-refdata/refdata-gex-mm10-2020-A/annotation/gene_annotation.xls
-  specie=human
+  specie=Mouse
 elif [[ $species == "hm" ]];then
   anno=/data/database/cellranger-refdata/refdata-gex-GRCh38-2020-A/annotation/gene_annotation.xls
-  specie=Mouse
+  specie=human
 else
   echo 'species error! only human mouse'
   exit
@@ -255,6 +255,15 @@ Rscript  /public/scRNA_works/pipeline/oesinglecell3/exec/sctool annotation \
   -g sub_${cell}/Marker/top10_markers_for_each_cluster.xls \
   --anno $anno  # 根据物种修改
 
+# 判断人和小鼠使用哪个参考数据集
+if [[ $species == 'mm' ]];then
+  sjj=/data/database/celltype_refdata/logNorm_rds/immgen.rds
+elif [[ $species == "hm" ]];then
+  sjj='/data/database/celltype_refdata/logNorm_rds/hpca.rds'
+else
+  echo 'species error! only human mouse'
+  exit
+fi
 Rscript  /public/scRNA_works/pipeline/oesinglecell3/exec/sctool  \
 -i ${seurat_sub}  \
 -f h5seurat \
@@ -264,7 +273,7 @@ Rscript  /public/scRNA_works/pipeline/oesinglecell3/exec/sctool  \
 --assay RNA \
 --dataslot counts \
 celltyping \
--r /data/database/celltype_refdata/logNorm_rds/immgen.rds \
+-r $sjj \
 --annolevel single \
 --usecluster F \
 --demethod classic \
