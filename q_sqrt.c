@@ -4,7 +4,7 @@ float OE_Q_sqrt( float number )
     long i;
     float x2, y;
     int fix = 0;
-    const float threehalfs = 1.5F;
+    // const float threehalfs = 1.5F;
     x2 = number * 0.5F;
     y  = number;
     i  = * ( long * ) &y;                       // evil floating point bit level hacking
